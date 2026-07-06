@@ -1,0 +1,33 @@
+api:
+
+  provider: CoinGecko
+
+  endpoint: /coins/markets
+
+  currency: usd
+
+  per_page: 250
+
+  order: market_cap_desc
+
+  page_limit: 5
+
+  request_timeout: 30
+
+  retry_attempts: 3
+
+  retry_wait_seconds: 5
+
+
+pipeline:
+
+  checkpoint_file: checkpoint.json
+
+  raw_output_dir: data/raw
+
+  processed_output_dir: data/processed
+
+
+logging:
+
+  file_name: pipeline.log

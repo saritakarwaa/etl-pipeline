@@ -1,3 +1,4 @@
+import os
 import time
 
 import requests
@@ -15,11 +16,14 @@ class APIClient:
 
     def __init__(
         self,
-        base_url: str,
+        base_url: str | None,
         timeout: int = 30
     ):
 
-        self.base_url = base_url
+        self.base_url = base_url or os.getenv(
+            "COINGECKO_BASE_URL",
+            "https://api.coingecko.com/api/v3"
+        )
 
         self.timeout = timeout
 
@@ -34,7 +38,10 @@ class APIClient:
         params: dict
     ):
 
-        url = f"{self.base_url}{endpoint}"
+        if not self.base_url:
+            raise ValueError("API base URL is not configured")
+
+        url = f"{self.base_url.rstrip('/')}{endpoint}"
 
         logger.info(
             f"Requesting {url}"

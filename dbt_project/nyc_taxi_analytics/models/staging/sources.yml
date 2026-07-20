@@ -1,0 +1,17 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: raw
+    tables:
+      - name: taxi_trips
+        description: "NYC Yellow Taxi trip records, Jan 2023"
+        columns:
+          - name: tpep_pickup_datetime
+            description: "Timestamp when meter engaged"
+          - name: fare_amount
+            description: "Meter fare"
+            tests:
+              - not_null
+      - name: weather
+        description: "Daily NYC weather from Open-Meteo"
